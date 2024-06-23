@@ -51,6 +51,8 @@ const Card = () => {
 
               <button
                 className="btn btn-danger"
+                onClick={() => navigate(`/pizzas/detalle${pizza.id}`)}
+              // addToCart(pizza.id, pizza.price)}
               >
                 Añadir &#128722;
               </button>
