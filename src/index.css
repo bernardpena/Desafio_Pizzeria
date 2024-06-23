@@ -4,7 +4,7 @@ li {
 
 .notFound {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-  url("../../assets/perrito.jpg");
+  url("../src/assets/img/notFound.png");
 background-size: cover;
 height: 100vh;
 }
@@ -36,7 +36,7 @@ height: 100vh;
 
 .header {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("../../assets/Header.jpg");
+    url("../src/assets/img/Header.jpg");
   background-size: cover;
   height: 40vh;
 }
