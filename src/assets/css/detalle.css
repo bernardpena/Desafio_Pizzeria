@@ -1,0 +1,57 @@
+picture img{
+    width: 150px;
+    height: 150px;
+}
+
+.cardButton{
+    color: red!important;
+    background-color: white!important;
+    border:1px solid red!important;
+}
+.cardButton:hover{
+    color:white!important;
+    background-color: #db2529!important;
+    font-weight: bold;
+}
+.cardButtonInverted:hover{
+    color: red!important;
+    background-color: white!important;
+    border:1px solid red!important;
+}
+.cardButtonInverted{
+    color:white!important;
+    background-color: #db2529!important;
+    font-weight: bold;
+}
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
+ul > p{
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 600px){
+    .boxModal{
+        width: 75%!important;
+        /* height: 75%; */
+        display: flex!important;
+        flex-direction: column!important;
+    }
+    .info{
+        flex-direction: column;
+    }
+    .info img{
+        width: 75%;
+        height: auto;
+    }
+    .info h2{
+        margin: 0;
+    }
+    .info p{
+        margin: 0;
+    }
+    .ingredients{
+        display: none;
+    }
+} */

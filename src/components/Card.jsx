@@ -5,7 +5,7 @@ import { formatoNumero } from "../formatoNumero.js";
 
 const Card = () => {
   // const [total, setTotal] = useState(0);
-  const { pizzas } = useContext(PizzasContext);
+  const { pizzas} = useContext(PizzasContext);
 
   const navigate = useNavigate();
 
@@ -41,7 +41,7 @@ const Card = () => {
             </h2>
 
             <div className="d-flex justify-content-around mb-4">
-              <button
+            <button
                 to={`pizza/${pizza.id}`}
                 className="btn btn-info text-white"
                 onClick={() => navigate(`/pizzas/${pizza.id}`)}
@@ -50,8 +50,8 @@ const Card = () => {
               </button>
 
               <button
-                className="btn btn-danger"
-                onClick={() => navigate(`/pizzas/detalle${pizza.id}`)}
+                className="btn btn-danger cardButton"
+                onClick={() => handleAddToCar(pizza.id)}
               // addToCart(pizza.id, pizza.price)}
               >
                 Añadir &#128722;
