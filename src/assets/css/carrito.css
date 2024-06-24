@@ -1,0 +1,29 @@
+table {
+    display: block;
+    align-items: center;
+    justify-items: center;
+    margin-top: 20px;
+    margin-left: 70px;
+}
+
+thead {
+    margin-left: 150px;
+}
+
+.tr-head-footer th{
+    margin-left: 100;
+}
+
+.table-Image img {
+    margin-top: 50px;
+    width: 150px;
+    height: 150px;
+}
+
+.quantity-Pizza button{
+    width: 50px;
+    font-weight: bold;
+}
+
+
+

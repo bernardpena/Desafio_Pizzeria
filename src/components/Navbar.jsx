@@ -5,9 +5,13 @@ import { PizzasContext } from "../context/PizzaProvider";
 
 
 const Navbar = () => {
+  const { carrito } = useContext(PizzasContext);
+  const totalAmount = carrito.reduce((acc, pizza) => acc + pizza.price * pizza.quantity, 0);
+  const totalItems = carrito.reduce((acc, pizza) => acc + pizza.quantity, 0);
 
-  const { pizza, total } = useContext(PizzasContext);
+
   const navigate = useNavigate();
+  console.log(carrito);
 
   return (
     <div className="navbar text-white py-3">
@@ -18,13 +22,13 @@ const Navbar = () => {
             <h4 className="mb-0">&#127829; Pizzería Mamma Mia!</h4>
           </Link>
           <Link
-          // to={`pizza/${pizza.id}`} className="logo-nombre mx-1 mb-0"
-          // onClick={() => navigate(`/pizzas/${pizza.id}`>
-            ><h4 className="mb-0">&#x1F6D2;$ {total}</h4>
+            to="/carrito"
+            className="btn btn-info text-white">
+            <h4 className="mb-0"> &#x1F6D2;$ {totalAmount.toFixed(2)}</h4>
           </Link>
 
         </div>
-      </div> 
+      </div>
     </div>
   );
 };

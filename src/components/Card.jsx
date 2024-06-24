@@ -1,13 +1,20 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PizzasContext } from "../context/PizzaProvider";
 import { formatoNumero } from "../formatoNumero.js";
 
 const Card = () => {
   // const [total, setTotal] = useState(0);
-  const { pizzas} = useContext(PizzasContext);
+  const { pizzas, agregaCarrito } = useContext(PizzasContext);
+  const [quantity, setQuantity] = useState(1);
 
   const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    for (let i = 0; i < quantity; i++) {
+      agregaCarrito(pizzas);
+    }
+  };
 
   return (
     <>
@@ -41,7 +48,7 @@ const Card = () => {
             </h2>
 
             <div className="d-flex justify-content-around mb-4">
-            <button
+              <button
                 to={`pizza/${pizza.id}`}
                 className="btn btn-info text-white"
                 onClick={() => navigate(`/pizzas/${pizza.id}`)}
@@ -51,8 +58,7 @@ const Card = () => {
 
               <button
                 className="btn btn-danger cardButton"
-                onClick={() => handleAddToCar(pizza.id)}
-              // addToCart(pizza.id, pizza.price)}
+                onClick={handleAddToCart}
               >
                 Añadir &#128722;
               </button>

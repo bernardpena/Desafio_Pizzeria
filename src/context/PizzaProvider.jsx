@@ -1,13 +1,7 @@
 import { React, createContext, useEffect, useState } from "react";
 
 //!Creación del context
-export const PizzasContext = createContext({
-  pizzas: [],
-  carrito: [],
-  setCarrito: () => { },
-  total: 0,
-  priceToCurrency: () => { }
-});
+export const PizzasContext = createContext();
 
 //! Provider con la fuente de datos
 const PizzasProvider = ({ children }) => {
@@ -30,72 +24,48 @@ const PizzasProvider = ({ children }) => {
 
 
   //! Funciones para el carro
-  const priceToCurrency = (value) => {
-    const priceToStr = value.toLocaleString("en");
-    return priceToStr.replace(',', '.');
-  }
-
-  const addToCar = (id) => {
-    const pizzaFinded = pizzas.find(pizzaOriginal => pizzaOriginal.id === id);
-    const pizzaIndex = carrito.findIndex(pizza => pizza.id === pizzaFinded.id);
-    const pizzaAdded = {
-      id: pizzaFinded.id,
-      price: pizzaFinded.price,
-      quantity: 1
-    };
-    if (pizzaIndex !== -1) {
-      const carritoUpdated = [...carrito];
-      carritoUpdated[pizzaIndex].quantity += 1;
-      setCarrito(carritoUpdated);
-
-    } else {
-      setCarrito([...carrito, pizzaAdded]);
-    }
-  }
-
-  const PizzasTotal = () => {
-    let total = 0;
-    carrito.forEach(pizza => {
-      total += pizza.quantity;
+  const agregaCarrito = (pizzas) => {
+    setCarrito((prevCart) => {
+      const existingPizza = prevCart.find((item) => item.id === pizzas.id);
+      if (existingPizza) {
+        return prevCart.map((item) =>
+          item.id === pizzas.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      } else {
+        return [...prevCart, { ...pizzas, quantity: 1 }];
+      }
     });
-    setTotal(total);
-  }
+  };
 
-  const pizzasSubTotal = (id) => {
-    let subtotal = 0;
-    const pizzaIndex = carrito.findIndex(pizza => pizza.id === id)
-    subtotal = carrito[pizzaIndex].quantity * carrito[pizzaIndex].price
-    return subtotal;
-  }
+  const toggleErase = (id) => {
+    setCarrito((prevCart) => prevCart.filter((pizzas) => pizzas.id !== id));
+  };
 
-  const totalCart = () => {
-    let total = 0;
-    carrito.forEach(pizza => {
-      total += (pizza.quantity * pizza.price);
+  const actualizaCantidad = (id, amount) => {
+    setCarrito((prevCart) => {
+      const updatedCart = prevCart.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + amount } : item
+      );
+      return updatedCart.filter((item) => item.quantity > 0);
     });
-    return total;
-  }
+  };
 
-  const removeFromCart = (id) => {
-    const pizzaIndex = carrito.findIndex(pizza => pizza.id === id);
-    if (pizzaIndex !== -1 && carrito[pizzaIndex].quantity > 1) {
-      const carritoUpdated = [...carrito];
-      carritoUpdated[pizzaIndex].quantity -= 1;
-      setCarrito(carritoUpdated);
-    } else if (pizzaIndex !== -1 && carrito[pizzaIndex].quantity === 1) {
-      setCarrito(carrito.filter((pizza) => pizza.id !== id))
-    }
-  }
+  const Incremento = (pizza) => {
+    agregaCarrito(pizza);
+  };
 
-  const cleanCart = () => {
-    setCarrito([]);
-  }
+  const Decremento = (pizza) => {
+    actualizaCantidad(pizza.id, -1);
+  };
+
+
+
 
   useEffect(() => {
     getPizzas();
   }, [carrito]);
 
-  const globalState = { pizzas, carrito, setCarrito, total, priceToCurrency, addToCar, PizzasTotal, pizzasSubTotal, totalCart, removeFromCart, cleanCart };
+  const globalState = { pizzas, carrito, setCarrito, agregaCarrito, toggleErase, Incremento, Decremento, actualizaCantidad };
 
   return (
     <PizzasContext.Provider
