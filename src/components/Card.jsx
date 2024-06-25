@@ -56,12 +56,6 @@ const Card = () => {
                 Ver Más &#128064;
               </button>
 
-              <button
-                className="btn btn-danger cardButton"
-                onClick={handleAddToCart}
-              >
-                Añadir &#128722;
-              </button>
             </div>
           </div>
         </div>
